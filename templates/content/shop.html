@@ -1,43 +1,40 @@
 {{define "content"}}
-	<div class="row categories">
-		<div class="columns small-10 small-offset-1">
-			<div class="row category orient-left">
-				<a href="/shop_details">
-					<div class="columns small-4">
-						<img src="/img/lemon.png" alt="lemon" />
-					</div>
-					<div class="columns small-8">
-						<h2>Juices and Mixes</h2>
-						<p>Explore our wide assortment of juices and mixes expected by
-							today's lemonade stand clientelle. Now featuring a full line of
-							organic juices that are guaranteed to be obtained from trees that
-							have never been treated with pesticides or artificial
-							fertilizers.</p>
-					</div>
-				</a>
-			</div>
-			<div class="row category orient-right">
-				<div class="columns small-8">
-					<h2>Cups, Straws, and Other Supplies</h2>
-					<p>From paper cups to bio-degradable plastic to straws and
-						napkins, LSS is your source for the sundries that keep your stand
-						running smoothly.</p>
-				</div>
+<div class="row categories">
+	<div class="columns small-10 small-offset-1">
+		<div class="row category orient-left">
+			<a href="{{(index .Categories 0).URL}}">
 				<div class="columns small-4">
-					<img src="/img/kiwi.png" alt="kiwi" />
-				</div>
-			</div>
-			<div class="row category orient-left">
-				<div class="columns small-4">
-					<img src="/img/pineapple.png" alt="pineapple" />
+					<img src="/img/{{(index .Categories 0).ImageURL}}" alt="{{(index .Categories 0).ImageURL}}" />
 				</div>
 				<div class="columns small-8">
-					<h2>Signs and Advertising</h2>
-					<p>Sure, you could just wait for people to find your stand
-						along the side of the road, but if you want to take it to the next
-						level, our premium line of advertising supplies.</p>
+					<h2>{{(index .Categories 0).Title}}</h2>
+					<p>{{(index .Categories 0).Description}}</p>
 				</div>
-			</div>
+			</a>
+		</div>
+		<div class="row category orient-right">
+			<a href="{{(index .Categories 1).URL}}">
+				<div class="columns small-8">
+					<h2>{{(index .Categories 1).Title}}</h2>
+					<p>{{(index .Categories 1).Description}}</p>
+				</div>
+				<div class="columns small-4">
+					<img src="/img/{{(index .Categories 1).ImageURL}}" alt="{{(index .Categories 1).ImageURL}}" />
+				</div>
+				
+			</a>
+		</div>
+		<div class="row category orient-left">
+			<a href="{{(index .Categories 2).URL}}">
+				<div class="columns small-4">
+					<img src="/img/{{(index .Categories 2).ImageURL}}" alt="{{(index .Categories 2).ImageURL}}" />
+				</div>
+				<div class="columns small-8">
+					<h2>{{(index .Categories 2).Title}}</h2>
+					<p>{{(index .Categories 2).Description}}</p>
+				</div>
+			</a>
 		</div>
 	</div>
+</div>
 {{end}}

@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"psgoweb/viewmodel"
 )
 
 func main() {
@@ -13,8 +14,15 @@ func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 		requestedFile := r.URL.Path[1:] //Remove slash leading path
 		t := templates[requestedFile+".html"]
+		var context interface{} //Take any data value empty interface
+		switch requestedFile {
+		case "shop":
+			context = viewmodel.NewShop()
+		default:
+			context = viewmodel.NewBase()
+		}
 		if t != nil {
-			err := t.Execute(w, nil)
+			err := t.Execute(w, context)
 			if err != nil {
 				log.Println(err)
 			}
