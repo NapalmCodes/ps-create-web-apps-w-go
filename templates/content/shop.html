@@ -1,40 +1,30 @@
 {{define "content"}}
 <div class="row categories">
 	<div class="columns small-10 small-offset-1">
-		<div class="row category orient-left">
-			<a href="{{(index .Categories 0).URL}}">
-				<div class="columns small-4">
-					<img src="/img/{{(index .Categories 0).ImageURL}}" alt="{{(index .Categories 0).ImageURL}}" />
-				</div>
+		{{range .Categories}}
+		<div class="row category {{if eq .IsOrientRight true}}
+									orient-right
+								 {{else}}
+									 orient-left
+								 {{end}}">
+			<a href="{{.URL}}">
+				{{ if eq .IsOrientRight false }}
+					<div class="columns small-4">
+						<img src="/img/{{.ImageURL}}" alt="{{.ImageURL}}" />
+					</div>
+				{{end}}
 				<div class="columns small-8">
-					<h2>{{(index .Categories 0).Title}}</h2>
-					<p>{{(index .Categories 0).Description}}</p>
+					<h2>{{.Title}}</h2>
+					<p>{{.Description}}</p>
 				</div>
+				{{ if eq .IsOrientRight true }}
+					<div class="columns small-4">
+						<img src="/img/{{.ImageURL}}" alt="{{.ImageURL}}" />
+					</div>
+				{{end}}
 			</a>
 		</div>
-		<div class="row category orient-right">
-			<a href="{{(index .Categories 1).URL}}">
-				<div class="columns small-8">
-					<h2>{{(index .Categories 1).Title}}</h2>
-					<p>{{(index .Categories 1).Description}}</p>
-				</div>
-				<div class="columns small-4">
-					<img src="/img/{{(index .Categories 1).ImageURL}}" alt="{{(index .Categories 1).ImageURL}}" />
-				</div>
-				
-			</a>
-		</div>
-		<div class="row category orient-left">
-			<a href="{{(index .Categories 2).URL}}">
-				<div class="columns small-4">
-					<img src="/img/{{(index .Categories 2).ImageURL}}" alt="{{(index .Categories 2).ImageURL}}" />
-				</div>
-				<div class="columns small-8">
-					<h2>{{(index .Categories 2).Title}}</h2>
-					<p>{{(index .Categories 2).Description}}</p>
-				</div>
-			</a>
-		</div>
+		{{end}}
 	</div>
 </div>
 {{end}}
