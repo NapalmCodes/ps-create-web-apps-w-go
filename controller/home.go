@@ -18,18 +18,12 @@ type home struct {
 func (h home) registerRoutes() {
 	http.HandleFunc("/", h.handleHome)
 	http.HandleFunc("/home", h.handleHome)
-	http.HandleFunc("/stand-locator", h.handleStandLocator)
 	http.HandleFunc("/login", h.handleLogin)
 }
 
 func (h home) handleHome(w http.ResponseWriter, r *http.Request) {
 	vm := viewmodel.NewHome()
 	h.homeTemplate.Execute(w, vm)
-}
-
-func (h home) handleStandLocator(w http.ResponseWriter, r *http.Request) {
-	vm := viewmodel.NewStandLocator()
-	h.standLocatorTemplate.Execute(w, vm)
 }
 
 func (h home) handleLogin(w http.ResponseWriter, r *http.Request) {

@@ -31,85 +31,25 @@
 						document.getElementById("search").addEventListener(
 								"click",
 								function(e) {
-									var coords = [ {
-										lat : 37.409,
-										lng : -122.06,
-										title : "Bobby's stand"
-									}, {
-										lat : 37.4092,
-										lng : -122.061,
-										title : "Macy's stand"
-									}, {
-										lat : 37.4094,
-										lng : -122.06,
-										title : "Juan's stand"
-									}, {
-										lat : 37.41,
-										lng : -122.065,
-										title : "Allison's stand"
-									}, {
-										lat : 37.415,
-										lng : -122.07,
-										title : "Chen's stand"
-									}, {
-										lat : 37.4217,
-										lng : -122.075,
-										title : "Matthew's stand"
-									}, {
-										lat : 37.4206,
-										lng : -122.08,
-										title : "Alice's stand"
-									}, {
-										lat : 37.4205,
-										lng : -122.083,
-										title : "Kara's stand"
-									}, {
-										lat : 37.414,
-										lng : -122.09,
-										title : "Fred's stand"
-									}, {
-										lat : 37.412,
-										lng : -122.09,
-										title : "Jake's stand"
-									}, {
-										lat : 37.41,
-										lng : -122.093,
-										title : "Wallace's stand"
-									}, {
-										lat : 37.416,
-										lng : -122.095,
-										title : "Gromit's stand"
-									}, {
-										lat : 37.41,
-										lng : -122.1,
-										title : "Kirk's stand"
-									}, {
-										lat : 37.41,
-										lng : -122.102,
-										title : "Lorelei's stand"
-									}, {
-										lat : 37.412,
-										lng : -122.099,
-										title : "Rebecca's stand"
-									}, {
-										lat : 37.407,
-										lng : -122.1025,
-										title : "Chris's stand"
-									}, {
-										lat : 37.423,
-										lng : -122.1025,
-										title : "Carson's stand"
-									} ];
+									var xhr = new XMLHttpRequest()
+									xhr.addEventListener("load", function () {
+										var coords = JSON.parse(xhr.response);
+										coords.forEach(function(coord) {
+											var marker = new google.maps.Marker({
+												position : new google.maps.LatLng(
+														coord.lat, coord.lng),
+												title : coord.title
+											});
 
-									coords.forEach(function(coord) {
-										var marker = new google.maps.Marker({
-											position : new google.maps.LatLng(
-													coord.lat, coord.lng),
-											title : coord.title
+											marker.setMap(map);
 										});
-
-										marker.setMap(map);
 									});
+									
+									xhr.open("post", "/api/stands");
+									var data = {
+										zipCode: document.getElementById("zipCode").value
+									};
+									xhr.send(JSON.stringify(data));
 								}, false);
 					}
 					google.maps.event
