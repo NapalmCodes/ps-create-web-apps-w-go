@@ -12,22 +12,22 @@ import (
 func main() {
 	templates := populateTemplates()
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		requestedFile := r.URL.Path[1:] //Remove slash leading path
-		t := templates[requestedFile+".html"]
-		var context interface{} //Take any data value empty interface
+		requestedFile := r.URL.Path[1:]
+		template := templates[requestedFile+".html"]
+		var context interface{}
 		switch requestedFile {
 		case "shop":
 			context = viewmodel.NewShop()
 		default:
-			context = viewmodel.NewBase()
+			context = viewmodel.NewHome()
 		}
-		if t != nil {
-			err := t.Execute(w, context)
+		if template != nil {
+			err := template.Execute(w, context)
 			if err != nil {
 				log.Println(err)
 			}
 		} else {
-			w.WriteHeader(http.StatusNotFound)
+			w.WriteHeader(404)
 		}
 	})
 	http.Handle("/img/", http.FileServer(http.Dir("public")))

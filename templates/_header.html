@@ -18,13 +18,13 @@
 				<nav class="columns small-6 small-offset-6">
 					<div class="row">
 						<div class="columns small-3 item">
-							<a href="/home" class="active">Home</a>
+							<a href="/home" class="{{ if eq .Active "home" }} active {{end}}">Home</a>
 						</div>
 						<div class="columns small-3 item">
-							<a href="/shop">Shop</a>
+							<a href="/shop" class="{{ if eq .Active "shop" }} active {{end}}">Shop</a>
 						</div>
 						<div class="columns small-6 item">
-							<a href=".">Stand Locator</a>
+							<a href="." class="{{ if eq .Active "standlocator" }} active {{end}}">Stand Locator</a>
 						</div>
 					</div>
 				</nav>
