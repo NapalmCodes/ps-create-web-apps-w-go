@@ -15354,8 +15354,7 @@ h1, h2, h3, h4, h5, h6 {
 button {
   margin: 0 1em;
   border-radius: 1em;
-  color: #333333 !important;
-  background-color: #97d077;
+  color: #93263d !important;
   text-transform: uppercase;
   font-size: 1em !important; }
 

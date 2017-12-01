@@ -3,13 +3,13 @@
 		<div class="columns small-6 small-offset-3">
 			<fieldset>
 				<legend>Login</legend>
-				<form action="/home" method="post" class="row">
+				<form action="/login" method="post" class="row">
 					<div class="row">
 						<div class="columns small-6 text-right">
 							email
 						</div>
 						<div class="columns small-6">
-							<input type="text" name="email" />
+							<input type="text" name="email" value="{{.Email}}" />
 						</div>
 					</div>
 					<div class="row">
@@ -17,7 +17,7 @@
 							password
 						</div>
 						<div class="columns small-6">
-							<input type="password" name="password" />
+							<input type="password" name="password" value="{{.Password}}"/>
 						</div>
 					</div>
 					<div class="row">

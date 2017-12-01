@@ -1,22 +1,22 @@
 {{define "content"}}
-<div class="row">
-	<div class="columns small-12">
-		<div class="row">
-			<div class="columns small-12">
-				<ul class="row products small-block-grid-4">
-					{{range .Products}}
-						<li class="product">
-							<img src="/img/{{.ImageURL}}" alt="{{.ImageURL}}" /> 
-							<a href="/shop_detail">
-								<h3>{{.Name}}</h3>
-							</a>
-							<p>{{.DescriptionShort}}</p>
-							<p>${{.PricePerLiter | printf "%.2f"}} / liter</p>
-						</li>
-					{{end}}
-				</ul>
-			</div>
-		</div> 
-	</div>
-</div> 
+	<div class="row">
+		<div class="columns small-12">
+			<div class="row">
+				<div class="columns small-12">
+					<ul class="row products small-block-grid-4">
+						{{range .Products}}
+							<li class="product">
+								<img src="/img/{{.ImageURL}}" alt="{{.ImageURL}}" /> 
+								<a href="/products/{{.ID}}">
+									<h3>{{.Name}}</h3>
+								</a>
+								<p>{{.DescriptionShort}}</p>
+								<p>${{.PricePerLiter | printf "%.2f"}} / liter</p>
+							</li>
+						{{end}}
+					</ul>
+				</div>
+			</div> 
+		</div>
+	</div> 
 {{end}}

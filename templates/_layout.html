@@ -3,13 +3,12 @@
 <head>
 <title>{{.Title}}</title>
 <link href="/css/app.css" rel="stylesheet" />
-<!-- Block optional provision, template means required -->
 {{block "styles" .}}{{end}}
 </head>
 <body>
-	{{template "_header.html" .}} <!-- . at end passes data context to children could also do .Title for parts -->
-    {{template "content" .}}
-    {{template "_footer.html" .}}
-    {{block "script" .}}{{end}}
+	{{template "_header.html" .}}
+	{{template "content" .}}
+	{{template "_footer.html" .}}
+    {{block "scripts" .}}{{end}}
 </body>
 </html>

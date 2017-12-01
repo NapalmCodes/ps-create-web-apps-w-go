@@ -3,20 +3,23 @@ package controller
 import (
 	"html/template"
 	"net/http"
-	"psgoweb/model"
-	"psgoweb/viewmodel"
 	"regexp"
 	"strconv"
+
+	"psgoweb/model"
+	"psgoweb/viewmodel"
 )
 
 type shop struct {
 	shopTemplate     *template.Template
 	categoryTemplate *template.Template
+	productTemplate  *template.Template
 }
 
 func (s shop) registerRoutes() {
 	http.HandleFunc("/shop", s.handleShop)
 	http.HandleFunc("/shop/", s.handleShop)
+	http.HandleFunc("/products/", s.handleProduct)
 }
 
 func (s shop) handleShop(w http.ResponseWriter, r *http.Request) {
@@ -36,4 +39,22 @@ func (s shop) handleCategory(w http.ResponseWriter, r *http.Request, categoryID 
 	products := model.GetProductsForCategory(categoryID)
 	vm := viewmodel.NewShopDetail(products)
 	s.categoryTemplate.Execute(w, vm)
+}
+
+func (s shop) handleProduct(w http.ResponseWriter, r *http.Request) {
+	productPattern, _ := regexp.Compile(`/products/(\d+)`)
+	matches := productPattern.FindStringSubmatch(r.URL.Path)
+	if len(matches) > 0 {
+		productID, _ := strconv.Atoi(matches[1])
+		product, err := model.GetProduct(productID)
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusNotFound)
+			return
+		}
+		vm := viewmodel.NewProduct(product)
+		s.productTemplate.Execute(w, vm)
+
+	} else {
+		http.NotFound(w, r)
+	}
 }

@@ -1,59 +1,55 @@
 {{define "content"}}
-	<div class="row detail">
-		<div class="columns-small-8 small-offset-2">
-			<div class="row">
-				<div class="columns small-4">
-					<img src="/img/lemon.png" alt="lemon" />
+	{{with .Product}}
+		<div class="row detail">
+			<div class="columns-small-8 small-offset-2">
+				<div class="row">
+					<div class="columns small-4">
+						<img src="/img/{{.ImageURL}}" alt="lemon" />
+					</div>
+					<div class="columns small-8 details">
+						<h2>{{.Name}}</h2>
+						<div class="row">
+							<div class="columns small-3 text-right">
+								Price
+							</div>
+							<div class="columns small-8 small-offset-1">
+								{{.PricePerLiter | printf "$%.2f"}}  / liter
+							</div>
+						</div>
+						<div class="row">
+							<div class="columns small-8 small-offset-4">
+								{{.PricePer10Liter | printf "$%.2f"}} / liter (10 or more)
+							</div>
+						</div>
+						<div class="row">
+							<div class="columns small-3 text-right">
+								Organic
+							</div>
+							<div class="columns small-8 small-offset-1">
+								{{if .IsOrganic}}Yes{{else}}No{{end}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="columns small-3 text-right">
+								Origin
+							</div>
+							<div class="columns small-8 small-offset-1">
+								{{.Origin}}
+							</div>
+						</div>
+					</div>
 				</div>
-				<div class="columns small-8 details">
-					<h2>Lemon Juice</h2>
-					<div class="row">
-						<div class="columns small-3 text-right">
-							Price
-						</div>
-						<div class="columns small-8 small-offset-1">
-							$1.09 / liter
-						</div>
-					</div>
-					<div class="row">
-						<div class="columns small-8 small-offset-4">
-							$1.04 / liter (10 or more)
-						</div>
-					</div>
-					<div class="row">
-						<div class="columns small-3 text-right">
-							Organic
-						</div>
-						<div class="columns small-8 small-offset-1">
-							Yes
-						</div>
-					</div>
-					<div class="row">
-						<div class="columns small-3 text-right">
-							Origin
-						</div>
-						<div class="columns small-8 small-offset-1">
-							California
-						</div>
+				<div class="row">
+					<div class="columns small-10 small-offset-1">
+						<hr/>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="columns small-10 small-offset-1">
-					<hr/>
-				</div>
-			</div>
-			<div class="row">
-				<div class="columns small-12">
-					<p>
-						Made from premium, organic Meyer lemons. These fruit are left on the tree until they reach the peak of ripeness 
-						and then juiced within 8 hours of being picked. 
-					</p>
-					<p>
-						Lemonade made from our premium juice is sure to make your stand the most popular in the neighborhood.
-					</p>
+				<div class="row">
+					<div class="columns small-12">
+						{{.DescriptionLong}}
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	{{end}}
 {{end}}
