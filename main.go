@@ -21,7 +21,7 @@ func main() {
 	db := connectToDatabase()
 	defer db.Close()
 	controller.Startup(templates)
-	http.ListenAndServe(":8000", &middleware.TimeoutMiddleware{new(middleware.GzipMiddleware)})
+	http.ListenAndServeTLS(":8000", "cert.pem", "key.pem", &middleware.TimeoutMiddleware{new(middleware.GzipMiddleware)})
 }
 
 func connectToDatabase() *sql.DB {
