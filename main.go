@@ -25,7 +25,7 @@ func main() {
 }
 
 func connectToDatabase() *sql.DB {
-	db, err := sql.Open("postgres", "postgres://lss@lss2:W!nn1ng!@lss2.postgres.database.azure.com:5432/lss")
+	db, err := sql.Open("postgres", "postgres://lss@lss2:x@lss2.postgres.database.azure.com:5432/lss")
 	if err != nil {
 		log.Fatalln(fmt.Errorf("Unable to connect to database: %v", err))
 	}
