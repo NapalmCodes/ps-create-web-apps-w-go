@@ -23,10 +23,14 @@ func (h home) registerRoutes() {
 }
 
 func (h home) handleHome(w http.ResponseWriter, r *http.Request) {
+	//Check if ResponseWriter implements pusher interface
+	if pusher, ok := w.(http.Pusher); ok {
+		pusher.Push("/css/app.css", &http.PushOptions{
+			Header: http.Header{"Content-Type": []string{"text/css"}},
+		})
+	}
 	vm := viewmodel.NewHome()
 	w.Header().Add("Content-Type", "text/html")
-	//Below simulates timeout for middleware to kill the processing with
-	//time.Sleep(4 * time.Second)
 	h.homeTemplate.Execute(w, vm)
 }
 
