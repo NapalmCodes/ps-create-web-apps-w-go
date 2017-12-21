@@ -13,6 +13,8 @@ import (
 	"psgoweb/middleware"
 	"psgoweb/model"
 
+	_ "net/http/pprof"
+
 	_ "github.com/lib/pq"
 )
 
@@ -21,11 +23,12 @@ func main() {
 	db := connectToDatabase()
 	defer db.Close()
 	controller.Startup(templates)
+	go http.ListenAndServe(":8080", nil) // Clear temporary channel no middleware
 	http.ListenAndServeTLS(":8000", "cert.pem", "key.pem", &middleware.TimeoutMiddleware{new(middleware.GzipMiddleware)})
 }
 
 func connectToDatabase() *sql.DB {
-	db, err := sql.Open("postgres", "postgres://lss@lss2:x@lss2.postgres.database.azure.com:5432/lss")
+	db, err := sql.Open("postgres", "postgres://lss@lss2:xxx@lss2.postgres.database.azure.com:5432/lss")
 	if err != nil {
 		log.Fatalln(fmt.Errorf("Unable to connect to database: %v", err))
 	}
